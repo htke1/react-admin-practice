@@ -21,7 +21,7 @@ export const PostList = props => (
             <TextField source="title" />
             <TextField source="body" />
         </Datagrid>
-    </List>
+    </List> 
 );
 
 export const PostCreate = props => (
