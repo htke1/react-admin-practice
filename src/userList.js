@@ -14,6 +14,4 @@ export const UserList = props => (
             <MyUriField source="company.name" />
         </Datagrid>
     </List>
-
-
 );
