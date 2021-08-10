@@ -9,7 +9,7 @@ import {
     ReferenceInput,
     SelectInput,
     TextInput,
-    Show, Edit, SimpleShowLayout, DateField, RichTextField,EditButton,ReferenceManyField, RichTextInput,DateInput, required
+    Show, Edit, SimpleShowLayout, DateField, RichTextField,EditButton,ReferenceManyField, required
 } from 'react-admin';
 
 
@@ -58,7 +58,7 @@ export const PostEdit = (props) => (
             <ReferenceManyField  label="Comments" reference="posts" target="post_id">
                 <Datagrid>
                     <TextField source="body" />
-                    <DateField source="created_at" />
+                    <TextField source="title" />
                     <EditButton />
                 </Datagrid>
             </ReferenceManyField>
