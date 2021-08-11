@@ -6,18 +6,21 @@ import LaunchIcon from '@material-ui/icons/Launch';
 const useStyles = makeStyles({
     link: {
         textDecoration: 'none',
+        backgroundColor: 'purple'
     },
     icon: {
         width: '0.5em',
         height: '0.5em',
         paddingLeft: 2,
-        color: 'gold    '
+        color: 'gold'
     },
+   
 });
 
 const MyUrlField = ({ source }) => {
     const record = useRecordContext();
     const classes = useStyles();
+    console.log(typeof(record.source));
     return record ? (
         <a href={record[source]} className={classes.link}>
             {record[source]}

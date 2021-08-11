@@ -9,7 +9,7 @@ import {
     ReferenceInput,
     SelectInput,
     TextInput,
-    Show, Edit, SimpleShowLayout, DateField, RichTextField,EditButton,ReferenceManyField, required
+    Show, Edit, SimpleShowLayout, RichTextField,EditButton,ReferenceManyField, required
 } from 'react-admin';
 
 
