@@ -9,7 +9,8 @@ import {
     ReferenceInput,
     SelectInput,
     TextInput,
-    Show, Edit, SimpleShowLayout, RichTextField,EditButton,ReferenceManyField, required
+    Show, Edit, SimpleShowLayout, RichTextField,EditButton,ReferenceManyField, required,
+     TopToolbar, Button
 } from 'react-admin';
 
 
@@ -38,8 +39,17 @@ export const PostCreate = props => (
         </Create>
     );  
 
+    const PostShowActions = ({ basePath, data, resource }) => (
+        <TopToolbar>
+            <EditButton basePath={basePath} record={data} />
+            {/* Add your custom actions */}
+            <Button color="primary" onClick={()=>console.log("custom action")} label="custom"></Button>
+        </TopToolbar>
+    );
+
+
 export const PostShow = (props) => (
-    <Show {...props}>
+    <Show actions={<PostShowActions/>} {...props}>
         <SimpleShowLayout>
             <TextField source="title" />
             <RichTextField source="body" />

@@ -14,7 +14,6 @@ function App(){
            <Resource name="users" list={UserList} />
            <Resource name="todos" list={ListGuesser} show={ShowGuesser} edit={EditGuesser}/>
    </Admin>
-   <h1>hi</h1>
 </>
   );
 }
