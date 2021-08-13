@@ -10,12 +10,33 @@ import {
     SelectInput,
     TextInput,
     Show, Edit, SimpleShowLayout, RichTextField,EditButton,ReferenceManyField, required,
-     TopToolbar, Button
+     TopToolbar, Button, downloadCSV, BulkDeleteButton, useNotify, useRefresh, useRedirect 
 } from 'react-admin';
+import jsonExport from 'jsonexport/dist';
 
+const PostBulkActionButtons = props => (
+    
+        <BulkDeleteButton {...props} />
 
+        );
+
+const exporter = posts => {
+    const postsForExport = posts.map(post => {
+        const { backlinks, userId, ...postForExport } = post; // omit backlinks and author
+        console.log(post)
+        return postForExport;
+    });
+    jsonExport(postsForExport, {
+        headers: [ 'id', 'title', 'body'] // order fields in the export
+    }, (err, csv) => {
+        if(err){
+            alert(err.message)
+        }
+        downloadCSV(csv, 'posts'); // download as 'posts.csv` file
+    });
+};
 export const PostList = props => (
-    <List {...props}>
+    <List {...props} title="lists of posts" exporter={exporter}  bulkActionButtons={<PostBulkActionButtons />}>
         <Datagrid rowClick="edit">
             <ReferenceField source="userId" reference="users">
                 <TextField source="name" />
@@ -39,17 +60,21 @@ export const PostCreate = props => (
         </Create>
     );  
 
-    const PostShowActions = ({ basePath, data, resource }) => (
+    const PostShowActions = (props ) => (
         <TopToolbar>
-            <EditButton basePath={basePath} record={data} />
-            {/* Add your custom actions */}
-            <Button color="primary" onClick={()=>console.log("custom action")} label="custom"></Button>
-        </TopToolbar>
+     
+       
+        <Button
+            onClick={() => { alert('Your custom action'); }}
+            label="Show calendar"
+        >
+        </Button>
+    </TopToolbar>
     );
 
 
 export const PostShow = (props) => (
-    <Show actions={<PostShowActions/>} {...props}>
+    <Show  {...props} actions={<PostShowActions/>}>
         <SimpleShowLayout>
             <TextField source="title" />
             <RichTextField source="body" />
@@ -58,8 +83,24 @@ export const PostShow = (props) => (
 ); 
 
 
-export const PostEdit = (props) => (
-    <Edit {...props}>
+export const PostEdit = (props) => {
+    const notify = useNotify();
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+
+    const onSuccess = () => {
+        notify(`Changes saved okay?`)
+        redirect('/users');
+        refresh();
+    };
+    const onFailure = (error) => {
+        notify(`Could not edit post: ${error.message}`)
+        redirect('/todos');
+        refresh();
+    };
+
+    return(
+    <Edit {...props} mutationMode="undoable" onSuccess={onSuccess} onFailure={onFailure}>
         <SimpleForm>
             <TextInput disabled label="Id" source="id" />
             <TextInput source="title" validate={required()} />
@@ -73,5 +114,5 @@ export const PostEdit = (props) => (
                 </Datagrid>
             </ReferenceManyField>
         </SimpleForm>
-    </Edit>
-);
+    </Edit>)
+    }
