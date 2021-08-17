@@ -11,7 +11,7 @@ function App(){
   return page?(
     <>
     <button onClick={()=>setPage("sample")}>JsonSampleApi</button>
-    <button onClick={()=>setPage("Quiz")}>Quiz Api</button>
+    <button onClick={()=>setPage("quiz")}>Quiz Api</button>
     {page==="sample"?(<Admin dataProvider={dataProvider}>
       <Resource name="posts"  list={PostList} show={PostShow} edit={PostEdit} create={PostCreate}/>
            <Resource name="users" list={UserList} />
