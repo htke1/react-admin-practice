@@ -19,7 +19,7 @@ function App(){
    </Admin>):<h1>Quiz api page</h1>}
     
 </> 
-  ):(<h1>Loading</h1>)
+  ):(<h1>Loading...</h1>)
 }
 
 export default App;
