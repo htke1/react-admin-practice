@@ -41,7 +41,7 @@ const postFilters = [
 ];
 
 export const PostList = props => (
-    <List {...props} title="lists of posts" exporter={exporter} filter={{ id: 2 }} bulkActionButtons={<PostBulkActionButtons />}>
+    <List {...props} title="lists of postsss" exporter={exporter} filter={{ id: 2 }} bulkActionButtons={<PostBulkActionButtons />}>
         <Datagrid rowClick="edit">
             <ReferenceField source="userId" reference="users">
                 <TextField source="name" />
